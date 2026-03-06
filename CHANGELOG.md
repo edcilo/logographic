@@ -1,5 +1,57 @@
 # Changelog
 
+## [Unreleased] - 2026-03-06
+
+### Solicitud
+Agregar un checkbox "Aleatorio" que controle si el orden de las tarjetas en el modal de practicas es aleatorio o secuencial (en el orden de seleccion).
+
+### Plan Ejecutado
+1. Nuevo estado `randomOrder` (`useState<boolean>(true)`) — por defecto activado, preservando el comportamiento original.
+2. Nuevo handler `randomChangeHandler` para controlar el checkbox.
+3. Renombrada funcion `getRandomChar` a `getNextChar` ya que ahora maneja ambos modos.
+4. Nuevo parametro `random: boolean` en `getNextChar`: cuando es `true` elige aleatoriamente, cuando es `false` usa busqueda circular desde la posicion actual para avanzar al siguiente caracter no memorizado en el orden de seleccion.
+5. Corregida logica de `skip` para no agregar el caracter actual a `newMemorized` cuando `skip=true`.
+6. Agregado early return cuando `remaining.length === 0` para señalar estado "done".
+7. `startClickHandler` y `restartClickHandler` en modo secuencial asignan directamente `selected[0]` como primer caracter.
+8. Agregado componente `Checkbox` de Mantine entre la tabla de caracteres y los botones de accion.
+9. Actualizados los 4 call sites para pasar `randomOrder`.
+10. Agregadas claves de traduccion `controls.randomOrder` en ambos idiomas.
+
+### Resultado
+- Build y lint pasan sin errores.
+- Checkbox "Random order" / "Orden aleatorio" controla el modo de presentacion en la practica.
+- Modo secuencial: los caracteres avanzan en el orden en que fueron seleccionados, skip avanza al siguiente sin memorizar, y al llegar al final hace wrap-around sobre los no memorizados.
+
+### Archivos Modificados
+- `src/Containers/Logographic/index.tsx` - Estado, handler, checkbox, logica dual en `getNextChar`
+- `src/i18n/messages/en.json` - Clave `randomOrder` agregada
+- `src/i18n/messages/es.json` - Clave `randomOrder` agregada
+
+---
+
+## [Unreleased] - 2026-03-06 (anterior)
+
+### Solicitud
+Agregar un boton que al darle clic deseleccione todos los caracteres seleccionados.
+
+### Plan Ejecutado
+1. Agregada funcion `deselectClickHandler` que resetea el estado `selected` a un array vacio.
+2. Los componentes `Chip` se convirtieron de no-controlados a controlados (`checked={selected.includes(char)}`) para que se desmarquen visualmente al limpiar el estado.
+3. Se envolvieron los botones "Deselect All" y "Start" en un `Flex` con `gap="sm"` y `justify="space-between"`.
+4. El boton usa `variant="outline"`, `color="red.8"`, icono `IconDeselect`, y se deshabilita cuando no hay caracteres seleccionados.
+5. Se agregaron las claves de traduccion `dictionary.deselectAll` en ambos idiomas.
+
+### Resultado
+- Build y lint pasan sin errores.
+- El boton "Deselect All" / "Deseleccionar todo" aparece junto al boton "Start" y limpia toda la seleccion de caracteres.
+
+### Archivos Modificados
+- `src/Containers/Logographic/index.tsx` - Boton de deseleccionar, Chips controlados, Flex wrapper
+- `src/i18n/messages/en.json` - Clave `deselectAll` agregada
+- `src/i18n/messages/es.json` - Clave `deselectAll` agregada
+
+---
+
 ## [Unreleased] - 2026-03-05
 
 ### Solicitud

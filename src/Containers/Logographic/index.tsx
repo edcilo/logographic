@@ -1,9 +1,9 @@
 "use client";
 
 import { Player } from "@/Components";
-import { Button, Card, Chip, Container, Flex, Modal, Select, Space, Table, Text } from "@mantine/core";
+import { Button, Card, Checkbox, Chip, Container, Flex, Modal, Select, Space, Table, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconBrain, IconPlayerSkipForward, IconRotate2 } from "@tabler/icons-react";
+import { IconBrain, IconDeselect, IconPlayerSkipForward, IconRotate2 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { alphabets } from "./alphabets";
@@ -28,6 +28,7 @@ export function Logographic() {
     const [selected, setSelected] = useState<Char[]>([]);
     const [currentChar, setCurrentChar] = useState<Char | null>(null);
     const [memorized, setMemorized] = useState<Char[]>([]);
+    const [randomOrder, setRandomOrder] = useState<boolean>(true);
     const [opened, {open, close}] = useDisclosure(false);
 
     const languageChangeHandler = (value: string | null) => {
@@ -43,28 +44,67 @@ export function Logographic() {
         }
     }
 
+    const deselectClickHandler = () => {
+        setSelected([]);
+    }
+
+    const randomChangeHandler = (value: boolean) => {
+        setRandomOrder(value);
+    }
+
     const startClickHandler = () => {
         setMemorized([]);
-        getRandomChar(null, selected, []);
+        if (randomOrder) {
+            getNextChar(null, selected, [], false, true);
+        } else {
+            setCurrentChar(selected[0] ?? null);
+        }
         open();
     }
 
     const restartClickHandler = () => {
         setMemorized([]);
-        getRandomChar(null, selected, []);
+        if (randomOrder) {
+            getNextChar(null, selected, [], false, true);
+        } else {
+            setCurrentChar(selected[0] ?? null);
+        }
     }
 
-    const getRandomChar = (current: Char | null, chars: Char[], memorized: Char[], skip:boolean=false) => {
-        const newMemorized = current && current.char.length > 0 ? [...memorized, current] : memorized;
+    const getNextChar = (current: Char | null, chars: Char[], memorized: Char[], skip: boolean = false, random: boolean = true) => {
+        const newMemorized = current && current.char.length > 0 && !skip
+            ? [...memorized, current]
+            : memorized;
 
         if (!skip) {
             setMemorized(newMemorized);
         }
 
-        const difference = chars.filter(char => !newMemorized.includes(char));
-        const currentChar = difference[Math.floor(Math.random() * difference.length)];
+        const remaining = chars.filter(char => !newMemorized.includes(char));
 
-        setCurrentChar(currentChar);
+        if (remaining.length === 0) {
+            setCurrentChar(null);
+            return;
+        }
+
+        if (random) {
+            const nextChar = remaining[Math.floor(Math.random() * remaining.length)];
+            setCurrentChar(nextChar);
+        } else {
+            const currentIndex = current ? chars.indexOf(current) : -1;
+            let nextChar: Char | null = null;
+
+            for (let i = 1; i <= chars.length; i++) {
+                const candidateIndex = (currentIndex + i) % chars.length;
+                const candidate = chars[candidateIndex];
+                if (!newMemorized.includes(candidate)) {
+                    nextChar = candidate;
+                    break;
+                }
+            }
+
+            setCurrentChar(nextChar);
+        }
     }
 
     return (
@@ -95,6 +135,7 @@ export function Logographic() {
                                                 <Table.Td key={j} align="center">
                                                     {char && (
                                                         <Chip
+                                                            checked={selected.includes(char)}
                                                             color="red.8"
                                                             size="sm"
                                                             onChange={(checked: boolean) => charChangeHandler(char, checked)}
@@ -112,15 +153,38 @@ export function Logographic() {
 
                         <Space h="md" />
 
-                        <Button
+                        <Checkbox
+                            checked={randomOrder}
                             color="red.8"
-                            disabled={selected.length === 0}
-                            onClick={startClickHandler}
-                        >
-                            <Text tt="capitalize" span>
-                                {t("dictionary.start")}
-                            </Text>
-                        </Button>
+                            label={t("controls.randomOrder")}
+                            onChange={(event) => randomChangeHandler(event.currentTarget.checked)}
+                        />
+
+                        <Space h="md" />
+
+                        <Flex gap="sm" justify="space-between">
+                            <Button
+                                color="red.8"
+                                disabled={selected.length === 0}
+                                onClick={startClickHandler}
+                            >
+                                <Text tt="capitalize" span>
+                                    {t("dictionary.start")}
+                                </Text>
+                            </Button>
+
+                            <Button
+                                color="red.8"
+                                disabled={selected.length === 0}
+                                leftSection={<IconDeselect size={16} />}
+                                variant="outline"
+                                onClick={deselectClickHandler}
+                            >
+                                <Text tt="capitalize" span>
+                                    {t("dictionary.deselectAll")}
+                                </Text>
+                            </Button>
+                        </Flex>
                     </>
                 ) : (
                     <Flex justify="center">
@@ -167,7 +231,7 @@ export function Logographic() {
                         color="gray.7"
                         disabled={memorized.length === selected.length}
                         leftSection={<IconPlayerSkipForward size={16} />}
-                        onClick={() => getRandomChar(currentChar, selected, memorized, true)}
+                        onClick={() => getNextChar(currentChar, selected, memorized, true, randomOrder)}
                     >
                         <Text tt="capitalize" size="sm" span>
                             {t("dictionary.skip")}
@@ -188,7 +252,7 @@ export function Logographic() {
                         <Button
                             color="red.8"
                             leftSection={<IconBrain size={16} />}
-                            onClick={() => getRandomChar(currentChar, selected, memorized)}
+                            onClick={() => getNextChar(currentChar, selected, memorized, false, randomOrder)}
                         >
                             <Text tt="capitalize" size="sm" span>
                                 {t("dictionary.memorized")}

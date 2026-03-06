@@ -3,9 +3,11 @@
         "alphabetSelectorLabel": "Select an alphabet",
         "charsSelectorEmpty": "Select an alphabet",
         "localeTooltip": "Change language",
+        "randomOrder": "Random order",
         "themeTooltip": "Change theme"
     },
     "dictionary": {
+        "deselectAll": "deselect all",
         "done": "done",
         "finished": "finished",
         "memorized": "memorized",
