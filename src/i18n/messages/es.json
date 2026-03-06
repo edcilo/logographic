@@ -1,0 +1,20 @@
+{
+    "controls": {
+        "alphabetSelectorLabel": "Selecciona un alfabeto",
+        "charsSelectorEmpty": "Selecciona un alfabeto",
+        "localeTooltip": "Cambiar idioma",
+        "themeTooltip": "Cambiar tema"
+    },
+    "dictionary": {
+        "done": "hecho",
+        "finished": "terminado",
+        "memorized": "memorizado",
+        "next": "siguiente",
+        "restart": "reiniciar",
+        "skip": "saltar",
+        "start": "comenzar"
+    },
+    "footer": {
+        "about": "acerca de"
+    }
+}
