@@ -1,9 +1,9 @@
 "use client";
 
 import { Player } from "@/Components";
-import { Button, Card, Checkbox, Chip, Container, Flex, Modal, Select, Space, Table, Text } from "@mantine/core";
+import { ActionIcon, Button, Card, Checkbox, Chip, Container, Flex, List, Modal, Select, Space, Table, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconBrain, IconDeselect, IconPlayerSkipForward, IconRotate2 } from "@tabler/icons-react";
+import { IconBrain, IconChecklist, IconDeselect, IconHandClick, IconList, IconPlayerPlay, IconPlayerSkipForward, IconQuestionMark, IconRotate2, IconVolume } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { alphabets } from "./alphabets";
@@ -30,6 +30,7 @@ export function Logographic() {
     const [memorized, setMemorized] = useState<Char[]>([]);
     const [randomOrder, setRandomOrder] = useState<boolean>(true);
     const [opened, {open, close}] = useDisclosure(false);
+    const [guideOpened, { open: openGuide, close: closeGuide }] = useDisclosure(false);
 
     const languageChangeHandler = (value: string | null) => {
         setLanguage(value || defaultAlphabet);
@@ -109,7 +110,17 @@ export function Logographic() {
 
     return (
         <Container size="xs">
-            <Card mt="xl" withBorder shadow="xs">
+            <Flex justify="flex-end" mt="sm">
+                <Tooltip label={t("guide.tooltip")}>
+                    <ActionIcon variant="subtle" color="gray" size="sm" radius="xl" onClick={openGuide}>
+                        <IconQuestionMark size={16} />
+                    </ActionIcon>
+                </Tooltip>
+            </Flex>
+
+            <Space h="sm" />
+
+            <Card withBorder shadow="xs">
                 <Select
                     size="md"
                     defaultValue={defaultAlphabet}
@@ -260,6 +271,38 @@ export function Logographic() {
                         </Button>
                     )}
                 </Flex>
+            </Modal>
+
+            <Modal
+                centered
+                opened={guideOpened}
+                onClose={closeGuide}
+                title={t("guide.title")}
+                overlayProps={{
+                    color: 'var(--mantine-color-dark-4)',
+                    blur: 5,
+                }}
+            >
+                <List type="ordered" spacing="md" size="sm" c="dimmed">
+                    <List.Item icon={<IconList size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step1")}
+                    </List.Item>
+                    <List.Item icon={<IconHandClick size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step2")}
+                    </List.Item>
+                    <List.Item icon={<IconChecklist size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step3")}
+                    </List.Item>
+                    <List.Item icon={<IconPlayerPlay size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step4")}
+                    </List.Item>
+                    <List.Item icon={<IconVolume size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step5")}
+                    </List.Item>
+                    <List.Item icon={<IconRotate2 size={16} color="var(--mantine-color-red-8)" />}>
+                        {t("guide.step6")}
+                    </List.Item>
+                </List>
             </Modal>
         </Container>
     )

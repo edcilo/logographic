@@ -3,6 +3,63 @@
 ## [Unreleased] - 2026-03-06
 
 ### Solicitud
+Agregar una guia de uso concisa por pasos, accesible desde un icono de ayuda discreto (`?`) en la pagina principal que abre un modal con las instrucciones.
+
+### Plan Ejecutado
+1. Agregadas claves de traduccion `guide.*` en ambos idiomas (`en.json` y `es.json`): `title`, `step1` a `step6`.
+2. Agregado `ActionIcon` con `IconQuestionMark` en la pagina principal, alineado a la derecha, arriba del selector de alfabeto.
+3. Agregado nuevo `Modal` con `List` ordenada de 6 pasos que describe el flujo completo de uso de la aplicacion.
+4. Nuevo `useDisclosure` independiente para el modal de guia (sin afectar el modal de practica existente).
+
+### Resultado
+- Build y lint pasan sin errores.
+- Icono de ayuda `?` visible en la pagina principal, al hacer clic abre un modal con la guia de uso en 6 pasos.
+- Guia internacionalizada (EN/ES).
+
+### Archivos Modificados
+- `src/Containers/Logographic/index.tsx` - ActionIcon, Modal de guia, imports actualizados
+- `src/i18n/messages/en.json` - Seccion `guide` agregada con 7 claves
+- `src/i18n/messages/es.json` - Seccion `guide` agregada con 7 claves
+
+---
+
+## [Unreleased] - 2026-03-06 (anterior-3)
+
+### Solicitud
+Crear tarjetas informativas en la pagina About con tres secciones: proposito de la aplicacion, enlaces de aprendizaje de Hiragana, y tecnologias utilizadas en la construccion del proyecto.
+
+### Plan Ejecutado
+1. Creada rama `feature/about-page` para la implementacion.
+2. Agregadas claves de traduccion `about.*` en ambos idiomas (`en.json` y `es.json`): `purposeTitle`, `purposeDescription`, `linksTitle`, `linksDescription`, `techTitle`.
+3. Creado nuevo Container `About/index.tsx` como client component con 3 tarjetas Mantine:
+   - **Tarjeta 1 (Proposito):** Icono `IconInfoCircle`, titulo traducido y descripcion de la app en texto `dimmed`.
+   - **Tarjeta 2 (Enlaces):** Icono `IconExternalLink`, 5 enlaces curados (Tofugu, JapanesePod101, YouTube/Marshallyin, RealKana, Wikimedia) con `Anchor` en `red.8`.
+   - **Tarjeta 3 (Tecnologias):** Icono `IconCode`, 7 `Badge` con `variant="light"` y `color="red.8"` (Next.js 16, React 19, TypeScript 5, Mantine 7, Tailwind CSS 3, next-intl 4, Tabler Icons).
+4. Actualizado barrel export en `Containers/index.ts`.
+5. Actualizado `about/page.tsx` para importar y usar el Container dentro de `<Layout>`.
+
+### Resultado
+- Build y lint pasan sin errores.
+- Pagina About muestra 3 tarjetas con informacion del proyecto, enlaces de aprendizaje y tecnologias.
+- Todas las cadenas de texto de UI estan internacionalizadas (EN/ES).
+- Sigue todas las convenciones del proyecto documentadas en AGENTS.md.
+
+### Actualizacion de enlaces
+- Eliminado enlace de JapanesePod101 (`https://www.japanesepod101.com/japanese-hiragana/`).
+- Agregado enlace de YouTube "How to Read and Write Hiragana Alphabet" (`https://www.youtube.com/watch?v=wD3FJgij79c`).
+
+### Archivos Modificados
+- `src/Containers/About/index.tsx` - Nuevo container con 3 tarjetas, enlaces actualizados
+- `src/Containers/index.ts` - Barrel export actualizado
+- `src/app/[locale]/about/page.tsx` - Page actualizada para usar AboutContainer
+- `src/i18n/messages/en.json` - Seccion `about` agregada con 5 claves
+- `src/i18n/messages/es.json` - Seccion `about` agregada con 5 claves
+
+---
+
+## [Unreleased] - 2026-03-06 (anterior-2)
+
+### Solicitud
 Agregar un checkbox "Aleatorio" que controle si el orden de las tarjetas en el modal de practicas es aleatorio o secuencial (en el orden de seleccion).
 
 ### Plan Ejecutado

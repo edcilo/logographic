@@ -18,5 +18,22 @@
     },
     "footer": {
         "about": "about"
+    },
+    "about": {
+        "purposeTitle": "Purpose",
+        "purposeDescription": "Logographic Memory is an interactive web tool designed to help you memorize logographic alphabets such as Japanese Hiragana. It displays characters in a grid where you can select specific subsets, then quizzes you in random or sequential order with audio playback. The app supports English and Spanish, as well as light and dark themes.",
+        "linksTitle": "Learning Resources",
+        "linksDescription": "Useful resources to deepen your understanding of Hiragana:",
+        "techTitle": "Built With"
+    },
+    "guide": {
+        "title": "How to use",
+        "step1": "Select an alphabet from the dropdown menu.",
+        "step2": "Tap the characters you want to practice to select them.",
+        "step3": "Toggle random order on or off with the checkbox.",
+        "step4": "Press \"start\" to begin the practice.",
+        "step5": "A character will appear with audio. Mark \"memorized\" if you remember it or \"skip\" to move on.",
+        "step6": "When you finish all characters, you can restart the practice.",
+        "tooltip": "Help"
     }
 }

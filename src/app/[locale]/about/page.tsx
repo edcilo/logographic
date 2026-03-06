@@ -1,9 +1,10 @@
+import { About as AboutContainer } from "@/Containers";
 import { Layout } from "@/layouts";
 
-export default function About() {
+export default function AboutPage() {
   return (
     <Layout>
-      <h1>About page</h1>
+      <AboutContainer />
     </Layout>
   );
 }
