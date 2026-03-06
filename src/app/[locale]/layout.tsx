@@ -8,6 +8,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: "Logographic Memory",
   description: "Memorize logographic alphabets with interactive quizzes and audio playback",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 type Props = {
