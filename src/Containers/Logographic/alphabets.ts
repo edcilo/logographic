@@ -91,98 +91,124 @@ export const alphabets = {
         [
             {
                 char: "な",
+                file: "/audio/hiragana/na.mp3"
             },
             {
                 char: "に",
+                file: "/audio/hiragana/ni.mp3"
             },
             {
                 char: "ぬ",
+                file: "/audio/hiragana/nu.mp3"
             },
             {
                 char: "ね",
+                file: "/audio/hiragana/ne.mp3"
             },
             {
                 char: "の",
+                file: "/audio/hiragana/no.mp3"
             }
         ],
         [
             {
                 char: "は",
+                file: "/audio/hiragana/ha.mp3"
             },
             {
                 char: "ひ",
+                file: "/audio/hiragana/hi.mp3"
             },
             {
                 char: "ふ",
+                file: "/audio/hiragana/fu.mp3"
             },
             {
                 char: "へ",
+                file: "/audio/hiragana/he.mp3"
             },
             {
                 char: "ほ",
+                file: "/audio/hiragana/ho.mp3"
             }
         ],
         [
             {
                 char: "ま",
+                file: "/audio/hiragana/ma.mp3"
             },
             {
                 char: "み",
+                file: "/audio/hiragana/mi.mp3"
             },
             {
                 char: "む",
+                file: "/audio/hiragana/mu.mp3"
             },
             {
                 char: "め",
+                file: "/audio/hiragana/me.mp3"
             },
             {
                 char: "も",
+                file: "/audio/hiragana/mo.mp3"
             }
         ],
         [
             {
                 char: "や",
+                file: "/audio/hiragana/ya.mp3"
             },
             null,
             {
                 char: "ゆ",
+                file: "/audio/hiragana/yu.mp3"
             },
             null,
             {
                 char: "よ",
+                file: "/audio/hiragana/yo.mp3"
             }
         ],
         [
             {
                 char: "ら",
+                file: "/audio/hiragana/ra.mp3"
             },
             {
                 char: "り",
+                file: "/audio/hiragana/ri.mp3"
             },
             {
                 char: "る",
+                file: "/audio/hiragana/ru.mp3"
             },
             {
                 char: "れ",
+                file: "/audio/hiragana/re.mp3"
             },
             {
                 char: "ろ",
+                file: "/audio/hiragana/ro.mp3"
             }
         ],
         [
             {
                 char: "わ",
+                file: "/audio/hiragana/wa.mp3"
             },
             null,
             null,
             null,
             {
                 char: "を",
+                file: "/audio/hiragana/wo.mp3"
             },
         ],
         [
             {
                 char: "ん",
+                file: "/audio/hiragana/n.mp3"
             },
             null,
             null,
