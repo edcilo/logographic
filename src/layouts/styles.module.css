@@ -1,0 +1,25 @@
+.layout {
+    @apply bg-[var(--mantine-color-dark-8)];
+    @apply dark:bg-[var(--mantine-color-gray-4)];
+}
+
+.layout header {
+    @apply bg-[var(--mantine-color-gray-2)];
+    @apply dark:bg-[var(--mantine-color-dark-9)];
+}
+
+.layout footer {
+    @apply pt-2;
+    @apply bg-[var(--mantine-color-dark-8)];
+    @apply dark:bg-[var(--mantine-color-gray-4)];
+}
+
+.line {
+    @apply bg-[var(--mantine-color-gray-2)];
+    @apply dark:bg-[var(--mantine-color-dark-9)];
+    @apply absolute h-[33%] w-full;
+    @apply after:content-[''] after:block after:w-full after:h-[150%] after:absolute after:top-[100%];
+    @apply after:bg-no-repeat after:bg-cover;
+    @apply after:bg-[url('/images/wave-light.svg')];
+    @apply dark:after:bg-[url('/images/wave-dark.svg')];
+}
